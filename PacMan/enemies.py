@@ -51,6 +51,8 @@ class Slime(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
  
+    def get_coordinate(self):
+        return self.rect.x, self.rect.y, self.change_x, self. change_y
 
     def update(self,horizontal_blocks,vertical_blocks):
         self.rect.x += self.change_x
@@ -82,7 +84,7 @@ class Slime(pygame.sprite.Sprite):
 
     def get_intersection_position(self):
         items = []
-        for i,row in enumerate(enviroment()):
+        for i,row in enumerate(environment()):
             for j,item in enumerate(row):
                 if item == 3:
                     items.append((j*32,i*32))
@@ -90,7 +92,7 @@ class Slime(pygame.sprite.Sprite):
         return items
     
         
-def enviroment():
+def environment():
     grid = ((0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0),
             (0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0),
             (1,3,1,1,1,1,1,1,1,3,1,1,1,1,1,1,1,3,1,1,1,1,1,3,1),
@@ -112,8 +114,8 @@ def enviroment():
 
     return grid
 
-def draw_enviroment(screen):
-    for i,row in enumerate(enviroment()):
+def draw_environment(screen):
+    for i,row in enumerate(environment()):
         for j,item in enumerate(row):
             if item == 1:
                 pygame.draw.line(screen, BLUE , [j*32, i*32], [j*32+32,i*32], 3)
